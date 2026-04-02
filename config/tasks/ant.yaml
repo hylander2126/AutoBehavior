@@ -1,0 +1,16 @@
+# Task-specific configuration for Ant locomotion (overrides default.yaml)
+
+task:
+  name: ant
+  xml_path: sim/assets/ant.xml
+  obs_dim: 27
+  act_dim: 8
+  max_steps: 1000
+  dt: 0.01
+  success_threshold: 800             # Minimum steps with forward velocity > 0.5
+
+llm:
+  temperature: 0.5                    # Lower temperature for more stable locomotion policies
+
+critic:
+  prompt_file: critic/prompts/ant_prompt.yaml

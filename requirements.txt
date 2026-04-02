@@ -1,0 +1,8 @@
+# Core runtime dependencies
+mujoco>=3.0.0
+PyYAML>=6.0
+numpy>=1.26.0
+openai>=1.0.0          # LLM API client (swap for anthropic, etc. as needed)
+
+# Development / testing
+pytest>=8.0.0

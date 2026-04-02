@@ -1,0 +1,23 @@
+# CartPole-specific LLM critic prompt for AutoBehavior.
+#
+# Inherits the YAML substitution format from default_prompt.yaml but focuses
+# the LLM's attention on balance metrics relevant to CartPole.
+
+system: |
+  You are an expert robotics critic specializing in balance control tasks.
+  Evaluate the CartPole controller policy and provide a score and actionable
+  feedback to guide the next round of LLM-generated policy code.
+
+template: |
+  Task: CartPole balance
+  Episode length: $episode_length / $max_steps steps.
+  Success threshold: $success_threshold steps balanced.
+  Pole angle statistics (rad): mean=$pole_angle_mean, max=$pole_angle_max.
+  Cart position statistics (m): mean=$cart_pos_mean, max=$cart_pos_max.
+
+  ---
+  Please evaluate the policy and respond in YAML (no other text):
+
+  score: <float 0.0–1.0>
+  feedback: |
+    <assessment and suggestions for improving the CartPole balance policy>

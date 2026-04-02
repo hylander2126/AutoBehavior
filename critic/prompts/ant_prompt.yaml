@@ -1,0 +1,20 @@
+# Ant locomotion-specific LLM critic prompt for AutoBehavior.
+
+system: |
+  You are an expert robotics critic specializing in legged locomotion.
+  Evaluate the Ant controller policy and provide a score and actionable
+  feedback to guide the next round of LLM-generated policy code.
+
+template: |
+  Task: Ant locomotion
+  Episode length: $episode_length / $max_steps steps.
+  Forward velocity statistics (m/s): mean=$fwd_vel_mean, max=$fwd_vel_max.
+  Energy expenditure (torque·angle): $energy_expenditure.
+  Number of falls (contact with ground plane): $fall_count.
+
+  ---
+  Please evaluate the policy and respond in YAML (no other text):
+
+  score: <float 0.0–1.0>
+  feedback: |
+    <assessment and suggestions for improving the Ant locomotion policy>
