@@ -1,0 +1,27 @@
+# AutoBehavior default configuration
+# Override any section by providing a task-specific YAML file.
+
+task:
+  name: cartpole          # Task name; must match a file in config/tasks/
+  max_steps: 500          # Maximum simulation steps per episode
+  dt: 0.02                # Simulation timestep (seconds)
+
+llm:
+  model: gpt-4o           # LLM model identifier (e.g. gpt-4o, claude-3-5-sonnet)
+  temperature: 0.7        # Sampling temperature for policy generation
+  max_tokens: 2048        # Maximum tokens per LLM call
+  api_base: null          # Optional: custom API base URL (null uses provider default)
+
+critic:
+  prompt_file: critic/prompts/default_prompt.yaml  # Path to critic prompt template
+  max_critique_tokens: 1024                        # Token budget for critique response
+  score_key: score                                 # Key in LLM response that contains the score
+
+demos:
+  directory: demos/       # Directory where reference trajectories are stored
+  format: npz             # File format for saved trajectories (npz or json)
+
+training:
+  iterations: 10          # Number of generate → simulate → critique iterations
+  top_k_policies: 3       # Keep the top-k policies across iterations
+  log_directory: logs/    # Directory for per-iteration trajectory logs

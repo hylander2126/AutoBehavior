@@ -1,0 +1,31 @@
+# Default LLM critic prompt template for AutoBehavior.
+#
+# The "template" string uses Python's string.Template substitution syntax.
+# Keys like $task_name, $episode_length, etc. are replaced at runtime with
+# values from the trajectory dictionary.
+
+system: |
+  You are an expert robotics critic evaluating the quality of a controller
+  policy running inside a physics simulator. Your job is to provide a
+  qualitative score and constructive feedback that will be used to improve
+  the policy in the next iteration.
+
+template: |
+  Task: $task_name
+  Episode length: $episode_length steps out of a maximum of $max_steps.
+  Total reward accumulated: $total_reward.
+
+  Observation sequence summary:
+  $observation_summary
+
+  Action sequence summary:
+  $action_summary
+
+  ---
+  Please evaluate the policy performance and respond in the following YAML
+  format (do not include any other text):
+
+  score: <float between 0.0 (complete failure) and 1.0 (perfect)>
+  feedback: |
+    <multi-line qualitative assessment explaining what worked, what failed,
+    and concrete suggestions for improving the policy>

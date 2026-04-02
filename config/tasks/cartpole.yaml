@@ -1,0 +1,13 @@
+# Task-specific configuration for CartPole (overrides default.yaml)
+
+task:
+  name: cartpole
+  xml_path: sim/assets/cartpole.xml   # Path to MuJoCo XML model
+  obs_dim: 4                           # Observation space dimensionality
+  act_dim: 1                           # Action space dimensionality
+  max_steps: 500
+  dt: 0.02
+  success_threshold: 475              # Minimum steps balanced to count as success
+
+critic:
+  prompt_file: critic/prompts/cartpole_prompt.yaml
